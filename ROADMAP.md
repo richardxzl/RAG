@@ -73,31 +73,31 @@
 - [x] 9.5 — Human-in-the-loop: pausar y pedir confirmación
 
 ### Módulo 10: Estado Persistente y Checkpoints
-- [ ] 10.1 — Checkpointing: guardar estado del grafo entre ejecuciones
-- [ ] 10.2 — Memory as state: conversación como parte del estado
-- [ ] 10.3 — Persistent threads: retomar conversaciones
-- [ ] 10.4 — Time travel: volver a un estado anterior
+- [x] 10.1 — Checkpointing: guardar estado del grafo entre ejecuciones
+- [x] 10.2 — Memory as state: conversación como parte del estado
+- [x] 10.3 — Persistent threads: retomar conversaciones
+- [x] 10.4 — Time travel: volver a un estado anterior
 
 ### Módulo 11: Multi-Agent Systems
-- [ ] 11.1 — Supervisor pattern: un agente coordina a otros
-- [ ] 11.2 — Subgraphs: grafos dentro de grafos
-- [ ] 11.3 — Handoff: un agente pasa el control a otro
-- [ ] 11.4 — Shared state vs isolated state
+- [x] 11.1 — Supervisor pattern: un agente coordina a otros
+- [x] 11.2 — Subgraphs: grafos dentro de grafos
+- [x] 11.3 — Handoff: un agente pasa el control a otro
+- [x] 11.4 — Shared state vs isolated state
 
 ---
 
 ## PARTE 3 — Producción
 
 ### Módulo 12: API REST
-- [ ] 12.1 — FastAPI wrapper del RAG
-- [ ] 12.2 — Streaming endpoint (SSE)
-- [ ] 12.3 — Rate limiting
-- [ ] 12.4 — Health checks
+- [x] 12.1 — FastAPI wrapper del RAG
+- [x] 12.2 — Streaming endpoint (SSE)
+- [x] 12.3 — Rate limiting
+- [x] 12.4 — Health checks
 
 ### Módulo 13: Supabase pgvector
-- [ ] 13.1 — Migrar de ChromaDB a pgvector
-- [ ] 13.2 — Índices y performance
-- [ ] 13.3 — Filtrado por metadata en SQL
+- [x] 13.1 — Migrar de ChromaDB a pgvector
+- [x] 13.2 — Índices y performance
+- [x] 13.3 — Filtrado por metadata en SQL
 
 ---
 

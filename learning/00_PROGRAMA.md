@@ -9,8 +9,8 @@
 
 ```
 PARTE 1 — LangChain Profundo    ✅ completa  (scripts 01–33)
-PARTE 2 — LangGraph             ✅ completa  (scripts 34–50)
-PARTE 3 — Producción            ⏳ pendiente
+PARTE 2 — LangGraph             ✅ completa  (scripts 34–58)
+PARTE 3 — Producción            ✅ completa  (scripts 59–65)
 ```
 
 Base ya implementada antes de los módulos:
@@ -94,32 +94,32 @@ Base ya implementada antes de los módulos:
 - [x] 9.4 — Tools custom (RAG, web, cálculos) → `49_tools_custom.py`
 - [x] 9.5 — Human-in-the-loop → `50_human_in_the_loop.py`
 
-### Módulo 10: Estado Persistente y Checkpoints ⏳
-- [ ] 10.1 — Checkpointing entre ejecuciones
-- [ ] 10.2 — Memory as state
-- [ ] 10.3 — Persistent threads
-- [ ] 10.4 — Time travel: volver a un estado anterior
+### Módulo 10: Estado Persistente y Checkpoints ✅
+- [x] 10.1 — Checkpointing → `51_checkpointing.py`
+- [x] 10.2 — Memory as state → `52_memory_as_state.py`
+- [x] 10.3 — Persistent threads → `53_persistent_threads.py`
+- [x] 10.4 — Time travel → `54_time_travel.py`
 
-### Módulo 11: Multi-Agent Systems ⏳
-- [ ] 11.1 — Supervisor pattern
-- [ ] 11.2 — Subgraphs
-- [ ] 11.3 — Handoff entre agentes
-- [ ] 11.4 — Shared state vs isolated state
+### Módulo 11: Multi-Agent Systems ✅
+- [x] 11.1 — Supervisor pattern → `55_supervisor_pattern.py`
+- [x] 11.2 — Subgraphs → `56_subgraphs.py`
+- [x] 11.3 — Handoff → `57_handoff.py`
+- [x] 11.4 — Shared state vs isolated state → `58_shared_vs_isolated_state.py`
 
 ---
 
-## PARTE 3 — Producción ⏳
+## PARTE 3 — Producción ✅
 
-### Módulo 12: API REST
-- [ ] 12.1 — FastAPI wrapper del RAG
-- [ ] 12.2 — Streaming endpoint (SSE)
-- [ ] 12.3 — Rate limiting
-- [ ] 12.4 — Health checks
+### Módulo 12: API REST ✅
+- [x] 12.1 — FastAPI wrapper del RAG → `59_fastapi_wrapper.py` · `learning/59_fastapi_wrapper.md`
+- [x] 12.2 — Streaming endpoint (SSE) → `60_streaming_endpoint.py` · `learning/60_streaming_endpoint.md`
+- [x] 12.3 — Rate limiting → `61_rate_limiting.py` · `learning/61_rate_limiting.md`
+- [x] 12.4 — Health checks → `62_health_checks.py` · `learning/62_health_checks.md`
 
-### Módulo 13: Supabase pgvector
-- [ ] 13.1 — Migrar de ChromaDB a pgvector
-- [ ] 13.2 — Índices y performance
-- [ ] 13.3 — Filtrado por metadata en SQL
+### Módulo 13: Supabase pgvector ✅
+- [x] 13.1 — Migrar de ChromaDB a pgvector → `63_pgvector_migrate.py` · `learning/63_pgvector_migrate.md`
+- [x] 13.2 — Índices y performance → `64_pgvector_indices.py` · `learning/64_pgvector_indices.md`
+- [x] 13.3 — Filtrado por metadata en SQL → `65_pgvector_metadata_filter.py` · `learning/65_pgvector_metadata_filter.md`
 
 ---
 
@@ -145,4 +145,8 @@ Base ya implementada antes de los módulos:
 39–45 (RAG como Grafo — Corrective RAG)
     ↓
 46–50 (Agentes — ReAct + HITL)
+    ↓
+51–54 (Estado persistente — checkpointing + time travel)
+    ↓
+55–58 (Multi-Agent — supervisor, subgraphs, handoff, Send)
 ```
