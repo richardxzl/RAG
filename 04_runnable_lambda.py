@@ -107,26 +107,21 @@ def build_instrumented_pipeline():
     retriever = get_retriever()
     llm = get_llm()
 
-    # Cada función Python se convierte en un Runnable con RunnableLambda
-    normalize   = RunnableLambda(normalize_question)
-    log_docs    = RunnableLambda(make_logger("retriever"))
-    log_context = RunnableLambda(make_logger("context"))
+    # Funciones de logging — se usan directamente, no como RunnableLambda
+    fn_log_docs    = make_logger("retriever")
+    fn_log_context = make_logger("context")
 
     # Pipeline con pasos custom insertados
     start_time = time.time()
 
-    retriever_with_log = retriever | RunnableLambda(make_logger("retriever"))
-
     pipeline = (
-        normalize                       # 1. Normalizar la pregunta
+        RunnableLambda(normalize_question)                 # 1. Normalizar la pregunta (str → str)
+        | RunnableLambda(lambda q: {"question": q})        # str → dict (requerido por assign)
         | RunnablePassthrough.assign(
-            question=lambda x: x,       # la pregunta normalizada queda en "question"
-            context=lambda x: (
-                log_context(            # 3. Loguear el contexto formateado
-                    format_docs(
-                        log_docs(       # 2. Loguear los docs crudos
-                            retriever.invoke(x)
-                        )
+            context=lambda x: fn_log_context(             # 3. Loguear el contexto formateado
+                format_docs(
+                    fn_log_docs(                           # 2. Loguear los docs crudos
+                        retriever.invoke(x["question"])
                     )
                 )
             ),
@@ -134,7 +129,7 @@ def build_instrumented_pipeline():
         | QUERY_PROMPT
         | llm
         | StrOutputParser()
-        | RunnableLambda(add_timing(start_time))  # 4. Enriquecer con timing
+        | RunnableLambda(add_timing(start_time))           # 4. Enriquecer con timing
     )
 
     return pipeline

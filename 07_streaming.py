@@ -145,7 +145,7 @@ def demo_streaming_rich_live(question: str) -> None:
 
 # ── Variante 3: Streaming con stream_events ──────────────────────────────────
 
-def demo_streaming_events(question: str) -> None:
+async def demo_streaming_events(question: str) -> None:
     """
     .stream_events() expone el flujo de eventos interno del pipeline.
     Cada evento tiene: event, name, data, run_id, tags.
@@ -178,7 +178,7 @@ def demo_streaming_events(question: str) -> None:
     llm_response = ""
     event_count = 0
 
-    for event in pipeline.stream_events(
+    async for event in pipeline.astream_events(
         {"question": question, "docs": docs},
         version="v2",
     ):
@@ -266,7 +266,8 @@ def run_demo() -> None:
     console.print()
 
     # ── Variante 3 ──
-    demo_streaming_events(question)
+    import asyncio
+    asyncio.run(demo_streaming_events(question))
 
     # ── Resumen comparativo ──
     console.rule("[bold]Resumen: ¿Cuándo usar cada variante?[/]")
