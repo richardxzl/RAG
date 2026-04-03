@@ -188,7 +188,8 @@ def show_operators():
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     show_comparison()
     show_langchain_api()

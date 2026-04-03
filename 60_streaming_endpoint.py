@@ -114,7 +114,8 @@ async def demo_streaming():
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     asyncio.run(demo_streaming())
 

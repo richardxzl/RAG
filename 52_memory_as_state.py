@@ -109,7 +109,8 @@ def demo_conversacion(grafo, thread_id: str, preguntas: list[str]):
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 10.2: Memory as State")
 

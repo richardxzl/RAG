@@ -173,7 +173,8 @@ def tabla_comparativa():
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 2.1: Prompt Templates")
     demo_prompt_template()

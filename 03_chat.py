@@ -14,7 +14,8 @@ console = Console()
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]🤖 RAG Chat Interactivo (LCEL + Memoria + Cache)")
     console.print("Escribe tus preguntas. Comandos especiales:")

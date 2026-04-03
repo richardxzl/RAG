@@ -99,7 +99,8 @@ def build_app_manual(limit: int = 10, window: float = 60.0) -> FastAPI:
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 12.3: Rate Limiting")
 

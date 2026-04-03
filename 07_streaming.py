@@ -247,7 +247,8 @@ def demo_streaming_events(question: str) -> None:
 # ── Demo principal ────────────────────────────────────────────────────────────
 
 def run_demo() -> None:
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Streaming (1.4)")
 

@@ -122,7 +122,8 @@ def evaluar_muestra(question: str, retriever, llm, parser, eval_chain) -> dict:
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 5.4: Comparar Configuraciones")
 

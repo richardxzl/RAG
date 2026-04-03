@@ -281,7 +281,8 @@ def mostrar_resumen():
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def run_demo():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Fallbacks (1.3)[/]")
     console.print(

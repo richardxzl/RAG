@@ -75,7 +75,8 @@ def mostrar_docs_comparacion(titulo: str, docs: list, color: str = "dim"):
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 3.5: Contextual Compression")
     console.print(f"\n[bold]Query:[/] {QUERY}\n")

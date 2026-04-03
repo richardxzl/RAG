@@ -155,7 +155,8 @@ def construir_grafo(con_scores: bool = False):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.3: Nodo Retriever")
 

@@ -143,7 +143,8 @@ def show_demo():
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("rag").setLevel(logging.INFO)
     logger = logging.getLogger(__name__)
     if not PGVECTOR_AVAILABLE or not os.getenv("DATABASE_URL"):
         show_demo()
