@@ -12,6 +12,7 @@ Permite identificar dónde optimizar: cache, chunk size, modelo más rápido, et
 """
 import time
 import statistics
+import logging
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
@@ -76,6 +77,8 @@ def benchmark_pipeline(query: str) -> dict[str, float]:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 6.4: Latencia por Componente")
 
     resultados_por_query = {}

@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://python.org)
 [![LangChain](https://img.shields.io/badge/LangChain-1.2-green)](https://python.langchain.com)
 [![LangGraph](https://img.shields.io/badge/LangGraph-1.1-purple)](https://langchain-ai.github.io/langgraph)
-[![Claude](https://img.shields.io/badge/LLM-Claude%20Haiku-orange)](https://anthropic.com)
+[![LLM](https://img.shields.io/badge/LLM-Multi--proveedor-orange)](https://python.langchain.com/docs/integrations/chat/)
 [![ChromaDB](https://img.shields.io/badge/VectorDB-ChromaDB-red)](https://trychroma.com)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-teal)](https://fastapi.tiangolo.com)
 
@@ -36,11 +36,12 @@ Módulo 13: Supabase pgvector (Migración, Índices, Filtros SQL)
 | Herramienta | Versión mínima | Para qué |
 |-------------|---------------|----------|
 | Python | 3.10+ | Todo |
-| API Key Anthropic | — | Llamadas al LLM |
+| API key del proveedor LLM | — | Según proveedor elegido (ver abajo) |
 | Redis | 7+ (opcional) | Módulos de cache (3, 6) |
 | PostgreSQL + pgvector | — (opcional) | Módulo 13 — requiere Supabase |
 
 > **Redis es opcional.** Los módulos de cache se degradan automáticamente si no está disponible.
+> **Con Ollama no necesitas ninguna API key** — el LLM corre 100% local.
 
 ---
 
@@ -75,26 +76,44 @@ pip install langchain-postgres psycopg2-binary
 
 > La primera ejecución descarga el modelo de embeddings `all-MiniLM-L6-v2` (~90 MB).
 
-### 4. Configurar credenciales
+### 4. Elegir proveedor LLM e instalar su paquete
+
+El proyecto soporta cualquier LLM compatible con LangChain. Solo necesitas dos cosas: instalar el paquete del proveedor y configurar la variable `LLM_MODEL` en `.env`.
+
+| Proveedor | Paquete | `LLM_MODEL` | API Key |
+|-----------|---------|-------------|---------|
+| **Anthropic** (default) | `langchain-anthropic` ✓ ya incluido | `anthropic/claude-haiku-4-5-20251001` | `ANTHROPIC_API_KEY` |
+| **OpenAI** | `pip install langchain-openai` | `openai/gpt-4o-mini` | `OPENAI_API_KEY` |
+| **Ollama** (local, sin API key) | `pip install langchain-ollama` | `ollama/llama3.2` | — |
+| **Google Gemini** | `pip install langchain-google-genai` | `google_genai/gemini-1.5-flash` | `GOOGLE_API_KEY` |
+| **Groq** | `pip install langchain-groq` | `groq/llama-3.1-8b-instant` | `GROQ_API_KEY` |
+
+### 5. Configurar `.env`
 
 Crea un archivo `.env` en la raíz del proyecto:
 
 ```bash
-# .env
-ANTHROPIC_API_KEY=sk-ant-your-key-here
+# ── LLM ─────────────────────────────────────────────────────────
+# Cambia esta línea para usar un proveedor diferente (ver tabla arriba)
+LLM_MODEL=anthropic/claude-haiku-4-5-20251001
 
-# Redis (opcional — cache semántico)
+# API key del proveedor activo (solo la que necesites)
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+# OPENAI_API_KEY=sk-...
+# GOOGLE_API_KEY=AIza...
+# GROQ_API_KEY=gsk_...
+
+# ── Opcionales ───────────────────────────────────────────────────
+# Redis (cache semántico)
 REDIS_URL=redis://localhost:6379
 
-# Supabase pgvector (opcional — Módulo 13)
+# Supabase pgvector (Módulo 13)
 DATABASE_URL=postgresql://postgres.[ref]:[pass]@aws-0-[region].pooler.supabase.com:6543/postgres
 
-# LangSmith tracing (opcional)
+# LangSmith tracing
 # LANGCHAIN_API_KEY=your-langsmith-key-here
 # LANGCHAIN_TRACING_V2=true
 ```
-
-Obtén tu API key en [console.anthropic.com](https://console.anthropic.com/).
 
 ### 5. Ingestar documentos (obligatorio — crea el vectorstore)
 
@@ -104,6 +123,59 @@ python 01_ingest.py
 ```
 
 Esto crea la carpeta `chroma_db/` con los embeddings locales.
+
+---
+
+## Cambiar de proveedor LLM
+
+Solo hay que editar `LLM_MODEL` en `.env` — ningún script necesita cambios.
+
+### Ejemplo 1: Ollama (local, gratuito, sin API key)
+
+```bash
+# 1. Instalar Ollama: https://ollama.com
+# 2. Descargar el modelo
+ollama pull llama3.2
+
+# 3. Instalar el paquete LangChain
+pip install langchain-ollama
+
+# 4. Actualizar .env
+LLM_MODEL=ollama/llama3.2
+# (eliminar o dejar comentada cualquier API key — no se necesita)
+
+# 5. Ejecutar cualquier script normalmente
+python 02_query.py
+python 45_loop_reformular.py  # Corrective RAG completo con Llama
+```
+
+### Ejemplo 2: OpenAI GPT-4o mini
+
+```bash
+# 1. Instalar el paquete
+pip install langchain-openai
+
+# 2. Actualizar .env
+LLM_MODEL=openai/gpt-4o-mini
+OPENAI_API_KEY=sk-...
+
+# 3. Sin más cambios — todo funciona igual
+python 02_query.py
+python 48_react_pattern.py  # ReAct agent con GPT-4o mini
+```
+
+### Cómo funciona internamente
+
+```python
+# rag/chain.py — get_llm() usa init_chat_model de LangChain
+from langchain.chat_models import init_chat_model
+
+def get_llm():
+    return init_chat_model(LLM_MODEL, temperature=LLM_TEMPERATURE)
+    # LLM_MODEL viene de .env — "proveedor/modelo"
+```
+
+`init_chat_model` detecta el proveedor por el prefijo (`anthropic/`, `openai/`, `ollama/`...) y construye el cliente correcto. Los 65 scripts no saben qué proveedor hay debajo.
 
 ---
 
@@ -264,7 +336,7 @@ No se envían documentos a ninguna API de embeddings. Usa `all-MiniLM-L6-v2` via
 | Categoría | Librería |
 |-----------|---------|
 | Orquestación | LangChain 1.2, LangGraph 1.1 |
-| LLM | Claude Haiku 4.5 (Anthropic) |
+| LLM (cualquiera) | Anthropic, OpenAI, Ollama, Google Gemini, Groq… |
 | Vector store | ChromaDB 1.5 (local) / pgvector (Supabase) |
 | Embeddings | sentence-transformers (local, sin API) |
 | Cache | Redis 7 (Semantic Cache) |

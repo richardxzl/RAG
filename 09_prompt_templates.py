@@ -7,6 +7,7 @@ Demuestra las diferencias entre los dos tipos de templates de LangChain:
 
 Incluye: partial variables, MessagesPlaceholder, inspección del template.
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -172,6 +173,8 @@ def tabla_comparativa():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 2.1: Prompt Templates")
     demo_prompt_template()
     demo_chat_prompt_template()

@@ -9,6 +9,7 @@ Requiere (para migración real):
   DATABASE_URL=postgresql://postgres.[ref]:[pass]@aws-0-[region].pooler.supabase.com:6543/postgres
 """
 import os
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -142,6 +143,8 @@ def show_demo():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     if not PGVECTOR_AVAILABLE or not os.getenv("DATABASE_URL"):
         show_demo()
         return

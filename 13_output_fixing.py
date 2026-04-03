@@ -9,6 +9,7 @@ Demuestra las 3 estrategias para manejar cuando el LLM no respeta el formato:
 Caso de uso: parser de análisis de sentimiento con modelo Pydantic.
 """
 import json
+import logging
 from typing import Literal
 from rich.console import Console
 from rich.panel import Panel
@@ -251,6 +252,8 @@ def tabla_comparativa():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 2.5: Output Fixing")
     demo_output_fixing()
     demo_retry_with_error()

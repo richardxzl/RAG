@@ -10,6 +10,7 @@ Demuestra validación tipada de output del LLM usando Pydantic:
 Caso de uso: extraer información estructurada de textos de noticias.
 """
 import json
+import logging
 from typing import Optional, Literal
 from rich.console import Console
 from rich.panel import Panel
@@ -156,6 +157,8 @@ def demo_validacion():
 # ── Demo principal ────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 2.4: PydanticOutputParser")
 
     demo_format_instructions()

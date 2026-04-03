@@ -11,6 +11,7 @@ Variaciones cubiertas:
   - Generator con citación de fuentes
   - Generator con control de confianza (sabe cuándo no sabe)
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -198,6 +199,8 @@ def construir_grafo(modo: str = "basico"):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.5: Nodo Generator")
 
     console.print(Panel(

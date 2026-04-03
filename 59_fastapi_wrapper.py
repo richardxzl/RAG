@@ -6,6 +6,7 @@ Demo: python 59_fastapi_wrapper.py
 Producción: uvicorn 59_fastapi_wrapper:app --reload --port 8000
 """
 import json
+import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.testclient import TestClient
 from pydantic import BaseModel
@@ -71,6 +72,8 @@ def query(req: QueryRequest):
 # ── Demo ──────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 12.1: FastAPI Wrapper")
 
     client = TestClient(app)

@@ -13,6 +13,7 @@ Grafo:
 El supervisor es el único que puede decidir cuándo terminar.
 Los sub-agentes hacen el trabajo y devuelven el control al supervisor.
 """
+import logging
 from typing import TypedDict, Literal, Annotated
 import operator
 
@@ -196,6 +197,8 @@ def construir_grafo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 11.1: Supervisor Pattern")
 
     console.print(Panel(

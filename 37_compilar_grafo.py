@@ -11,6 +11,7 @@ El proceso completo de LangGraph es:
 Este script cubre las distintas formas de ejecutar el grafo compilado
 y cómo inspeccionar el estado en cada paso.
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -129,6 +130,8 @@ def demo_get_state(grafo, entrada: str):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 7.4: Compilar y ejecutar")
 
     console.print(Panel(

@@ -11,6 +11,7 @@ Dos estrategias:
 Grafo:
   START → router → [retriever → generator] o [directo] → END
 """
+import logging
 from typing import TypedDict, Literal, Annotated
 import operator
 
@@ -181,6 +182,8 @@ def construir_grafo(usar_llm: bool = False):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.2: Nodo Router")
 
     console.print(Panel(

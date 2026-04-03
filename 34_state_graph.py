@@ -11,6 +11,7 @@ y múltiples actores. La unidad central es el StateGraph:
 Este script construye el grafo más simple posible:
   START → nodo_a → nodo_b → END
 """
+import logging
 from typing import TypedDict
 
 from rich.console import Console
@@ -77,6 +78,8 @@ def construir_grafo() -> StateGraph:
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 7.1: StateGraph")
 
     console.print(Panel(

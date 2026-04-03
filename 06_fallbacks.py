@@ -7,6 +7,7 @@ Demuestra tres mecanismos de resiliencia en LCEL:
   B. .with_fallbacks()    — Runnable alternativo cuando el primario falla permanentemente
   C. Fallback RAG → LLM   — pipeline completo: si falla el retriever, responde sin contexto
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -280,6 +281,8 @@ def mostrar_resumen():
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def run_demo():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Fallbacks (1.3)[/]")
     console.print(
         "\n[dim]Cada caso activa el mecanismo de resiliencia de forma visible. "

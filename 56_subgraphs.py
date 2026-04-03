@@ -17,6 +17,7 @@ Casos de uso:
 Este script convierte el pipeline RAG en un subgraph y lo usa
 desde un grafo padre que añade enrutamiento y post-procesamiento.
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -140,6 +141,8 @@ def construir_grafo_padre():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 11.2: Subgraphs")
 
     console.print(Panel(

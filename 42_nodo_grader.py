@@ -12,6 +12,7 @@ Dos estrategias de grading:
   1. Score de similitud (umbral fijo, sin LLM)
   2. LLM judge (más preciso, evalúa semántica)
 """
+import logging
 from typing import TypedDict, Literal, Annotated
 import operator
 
@@ -207,6 +208,8 @@ def construir_grafo(usar_llm: bool = False):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.4: Nodo Grader")
 
     console.print(Panel(

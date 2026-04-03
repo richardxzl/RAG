@@ -16,6 +16,7 @@ Patrones cubiertos:
   - Nodo que lee múltiples keys del estado
   - Nodo que acumula en una lista (reducer pattern)
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -112,6 +113,8 @@ def construir_grafo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 7.2: Nodes")
 
     console.print(Panel(

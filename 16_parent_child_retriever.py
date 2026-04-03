@@ -8,6 +8,7 @@ Problema que resuelve: un chunk de 200 chars puede matchear bien la query
 pero ser demasiado corto para que el LLM genere una buena respuesta.
 La solución es buscar con el hijo pequeño pero responder con el padre grande.
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -85,6 +86,8 @@ def cargar_documentos_en_retriever(retriever: ParentDocumentRetriever):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 3.3: Parent-Child Retriever")
 
     console.print("\n[dim]Construyendo retriever y cargando documentos...[/]")

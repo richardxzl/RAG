@@ -20,6 +20,7 @@ Anatomy de una herramienta:
 """
 import math
 import time
+import logging
 from typing import Optional
 
 from rich.console import Console
@@ -177,6 +178,8 @@ def construir_agente_completo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 9.4: Tools Custom")
 
     console.print(Panel(

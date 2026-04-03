@@ -16,6 +16,7 @@ Componentes necesarios:
   3. thread_config:  identificador de la conversación pausada
   4. Command(resume): continúa la ejecución desde donde se pausó
 """
+import logging
 from typing import TypedDict, Annotated, Literal
 
 from rich.console import Console
@@ -305,6 +306,8 @@ def demo_hitl_auto():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 9.5: Human-in-the-Loop")
 
     console.print(Panel(

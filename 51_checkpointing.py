@@ -13,6 +13,7 @@ Checkpointers disponibles:
   - SqliteSaver:  SQLite (persistente) — requiere langgraph-checkpoint-sqlite
   - PostgresSaver: Postgres — requiere langgraph-checkpoint-postgres
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -72,6 +73,8 @@ def construir_grafo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 10.1: Checkpointing")
 
     console.print(Panel(

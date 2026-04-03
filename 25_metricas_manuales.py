@@ -10,6 +10,7 @@ Implementa métricas de evaluación RAG sin dependencias externas:
 Cada métrica usa el LLM como juez (LLM-as-a-judge pattern).
 """
 import json
+import logging
 from pathlib import Path
 from rich.console import Console
 from rich.table import Table
@@ -155,6 +156,8 @@ def evaluar_sample(sample: dict, llm, retriever) -> dict:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 5.2: Métricas Manuales")
 
     if not DATASET_PATH.exists():

@@ -16,6 +16,7 @@ La función de routing:
   - Retorna un STRING que es una key del mapa de destinos
   - NO modifica el estado (solo lee)
 """
+import logging
 from typing import TypedDict, Literal
 
 from rich.console import Console
@@ -120,6 +121,8 @@ def construir_grafo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 7.3: Edges condicionales")
 
     console.print(Panel(

@@ -8,6 +8,7 @@ Demuestra cómo enseñar al LLM con ejemplos dentro del prompt:
 
 Caso de uso: clasificador de sentimiento de reseñas de productos.
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -137,6 +138,8 @@ def demo_few_shot_dinamico(resena: str, selector) -> tuple[str, list]:
 # ── Demo completo ─────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 2.2: Few-shot Prompting")
 
     console.print("\n[dim]Construyendo selector semántico (vectoriza los ejemplos)...[/]")

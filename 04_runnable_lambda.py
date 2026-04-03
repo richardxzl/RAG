@@ -9,6 +9,7 @@ usando RunnableLambda. Incluye tres casos de uso reales:
   3. Enriquecimiento del output (agregar metadata a la respuesta)
 """
 import time
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -142,6 +143,8 @@ def build_instrumented_pipeline():
 # ── Demo ─────────────────────────────────────────────────────────────────────
 
 def run_demo():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — RunnableLambda (1.1)")
 
     questions = [

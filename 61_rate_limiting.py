@@ -5,6 +5,7 @@ Limitar requests a la API para controlar costos del LLM y evitar abuso.
 Dos enfoques: slowapi (decorador) y middleware manual (sin dependencias extra).
 Demo: python 61_rate_limiting.py
 """
+import logging
 from collections import defaultdict
 from time import time
 from fastapi import FastAPI, Request
@@ -98,6 +99,8 @@ def build_app_manual(limit: int = 10, window: float = 60.0) -> FastAPI:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 12.3: Rate Limiting")
 
     # Demo con middleware manual (funciona sin instalar nada extra)

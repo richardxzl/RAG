@@ -13,6 +13,7 @@ Métricas que usa RAGAS:
   - context_recall: ¿el contexto cubre el ground truth? (requiere ground truth)
 """
 import json
+import logging
 from pathlib import Path
 from rich.console import Console
 from rich.table import Table
@@ -147,6 +148,8 @@ def demo_sin_ragas(samples: list[dict]):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 5.3: RAGAS")
 
     if not DATASET_PATH.exists():

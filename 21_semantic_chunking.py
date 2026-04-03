@@ -7,6 +7,7 @@ cuando el cambio de tema es suficientemente grande.
 
 Requiere: pip install langchain-experimental
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -138,6 +139,8 @@ def comparar_coherencia(chunks_fixed: list, chunks_semantic: list):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 4.2: Semantic Chunking")
 
     from langchain_text_splitters import RecursiveCharacterTextSplitter

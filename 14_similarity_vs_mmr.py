@@ -7,6 +7,7 @@ Compara dos estrategias de búsqueda en el vector store:
 
 MMR evita que el retriever devuelva 4 chunks que dicen casi lo mismo.
 """
+import logging
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
@@ -71,6 +72,8 @@ def calcular_solapamiento(docs: list) -> float:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 3.1: Similarity vs MMR")
     console.print(f"\n[bold]Query:[/] {QUERY}\n")
 

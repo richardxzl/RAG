@@ -15,6 +15,7 @@ APIs clave:
   - grafo.get_state(config)          → snapshot más reciente
   - grafo.invoke(input, config)      → continuar desde un checkpoint_id específico
 """
+import logging
 from typing import Annotated
 
 from rich.console import Console
@@ -90,6 +91,8 @@ def mostrar_historial(grafo, thread_id: str):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 10.4: Time Travel")
 
     console.print(Panel(

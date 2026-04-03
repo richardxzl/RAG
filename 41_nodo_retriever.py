@@ -14,6 +14,7 @@ Variaciones cubiertas:
   - Retriever con metadata (logging de scores y fuentes)
   - Multi-retriever (pregunta original + reformulada)
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 import time
@@ -154,6 +155,8 @@ def construir_grafo(con_scores: bool = False):
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.3: Nodo Retriever")
 
     console.print(Panel(

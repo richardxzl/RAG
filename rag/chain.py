@@ -5,10 +5,14 @@ Provee funciones para construir chains RAG que usan el cache
 de forma transparente. El llamador no necesita saber si la
 respuesta vino del cache o del LLM.
 """
-from langchain_anthropic import ChatAnthropic
+import logging
+from langchain.chat_models import init_chat_model
+from langchain_core.language_models import BaseChatModel
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
+
+logger = logging.getLogger(__name__)
 
 from rag.config import LLM_MODEL, LLM_TEMPERATURE, LLM_MAX_TOKENS
 from rag.retriever import get_retriever, get_vectorstore
@@ -20,13 +24,29 @@ def format_docs(docs) -> str:
     return "\n\n---\n\n".join(doc.page_content for doc in docs)
 
 
-def get_llm() -> ChatAnthropic:
-    """Crea la instancia del LLM."""
-    return ChatAnthropic(
-        model=LLM_MODEL,
-        temperature=LLM_TEMPERATURE,
-        max_tokens=LLM_MAX_TOKENS,
-    )
+def get_llm() -> BaseChatModel:
+    """
+    Crea la instancia del LLM según LLM_MODEL en .env.
+
+    Formato: "proveedor/modelo"
+      anthropic/claude-haiku-4-5-20251001  → ANTHROPIC_API_KEY
+      openai/gpt-4o-mini                   → OPENAI_API_KEY
+      ollama/llama3.2                      → sin API key (local)
+      google_genai/gemini-1.5-flash        → GOOGLE_API_KEY
+      groq/llama-3.1-8b-instant           → GROQ_API_KEY
+    """
+    if "/" in LLM_MODEL:
+        provider, model = LLM_MODEL.split("/", 1)
+    else:
+        provider, model = "anthropic", LLM_MODEL
+
+    logger.info("LLM activo: provider=%s model=%s temperature=%s", provider, model, LLM_TEMPERATURE)
+
+    kwargs = {"temperature": LLM_TEMPERATURE}
+    # Ollama y otros proveedores locales no aceptan max_tokens como parámetro
+    if provider not in ("ollama",):
+        kwargs["max_tokens"] = LLM_MAX_TOKENS
+    return init_chat_model(model, model_provider=provider, **kwargs)
 
 
 # ── Prompts ────────────────────────────────────────────────

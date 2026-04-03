@@ -7,6 +7,7 @@ Combina dos tipos de retrieval complementarios:
 
 EnsembleRetriever fusiona ambos resultados con Reciprocal Rank Fusion (RRF).
 """
+import logging
 from rich.console import Console
 from rich.table import Table
 
@@ -82,6 +83,8 @@ def mostrar_comparacion(query: str, docs_embedding: list, docs_hybrid: list):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 3.2: Hybrid Search")
 
     console.print("\n[dim]Cargando documentos para BM25...[/]")

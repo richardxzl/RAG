@@ -14,6 +14,7 @@ Metadata que agregamos:
 """
 import os
 import re
+import logging
 from datetime import datetime, timezone
 from rich.console import Console
 from rich.panel import Panel
@@ -182,6 +183,8 @@ def demo_valor_en_retrieval():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 4.3: Metadata Enrichment")
     demo_metadata_basica()
     demo_metadata_enriquecida()

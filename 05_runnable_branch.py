@@ -10,6 +10,7 @@ Tres ramas posibles:
   2. conversacional  → el LLM responde directamente (sin RAG)
   3. factual         → pipeline RAG completo (rama por defecto)
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -207,6 +208,8 @@ def mostrar_resultado(pregunta: str, respuesta: str, intencion: str):
 # ── Demo ─────────────────────────────────────────────────────────────────────
 
 def run_demo():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — RunnableBranch (1.2)")
 
     console.print(

@@ -10,6 +10,7 @@ Métricas por configuración:
   - Tokens de contexto enviados al LLM (estimado)
 """
 import time
+import logging
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
@@ -129,6 +130,8 @@ def evaluar_configuracion(docs_originales: list[Document], chunk_size: int) -> d
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 4.4: Comparar chunk sizes")
 
     console.print("\n[dim]Cargando documentos originales...[/]")

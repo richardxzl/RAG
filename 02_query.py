@@ -4,6 +4,7 @@
 Entry point simple que usa los módulos de rag/.
 """
 import sys
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -14,6 +15,8 @@ console = Console()
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Consulta (LCEL + Cache)")
 
     query_fn, semantic_cache = build_query_chain()

@@ -4,6 +4,7 @@
 HNSW vs IVFFlat: cuándo usar cada uno, cómo configurarlos y SQL de creación.
 No requiere conexión a Supabase — todo el contenido es educativo.
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -138,6 +139,8 @@ def show_benchmark():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     show_comparison()
     show_tuning()
 

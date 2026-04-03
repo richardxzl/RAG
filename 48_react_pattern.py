@@ -14,6 +14,7 @@ LangGraph implementa esto con un grafo de dos nodos en loop:
 Este script implementa el patrón manualmente para entenderlo,
 y luego muestra create_react_agent como alternativa compacta.
 """
+import logging
 from typing import TypedDict, Annotated
 
 from rich.console import Console
@@ -140,6 +141,8 @@ def construir_react_prebuilt():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 9.3: ReAct Pattern")
 
     console.print(Panel(

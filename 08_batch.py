@@ -10,6 +10,7 @@ Tres escenarios:
   3. Config por item: RunnableConfig individual para cada invocación
 """
 import time
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -266,6 +267,8 @@ def escenario_config_por_item(pipeline, preguntas: list[str]) -> None:
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def run_demo():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Batch (1.5)")
     console.print(
         Panel(

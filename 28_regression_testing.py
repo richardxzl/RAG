@@ -11,6 +11,7 @@ Flujo:
   4. Si la diferencia supera el threshold, reporta regresión
 """
 import json
+import logging
 from pathlib import Path
 from datetime import datetime, timezone
 from rich.console import Console
@@ -180,6 +181,8 @@ def comparar_con_baseline(resultados_actuales: list[dict], baseline: dict):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 5.5: Regression Testing")
 
     if not DATASET_PATH.exists():

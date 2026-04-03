@@ -12,6 +12,7 @@ Patrón: generator → hallucination_check → [si OK: END] [si alucina: regener
 
 En este módulo implementamos el LLM judge, que es el estándar en producción.
 """
+import logging
 from typing import TypedDict, Literal, Annotated
 import operator
 
@@ -174,6 +175,8 @@ def construir_grafo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.6: Hallucination Check")
 
     console.print(Panel(

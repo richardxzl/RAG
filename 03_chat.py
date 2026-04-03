@@ -1,6 +1,7 @@
 """
 03_chat.py — Chat RAG interactivo con LCEL + Memoria + Cache
 """
+import logging
 from langchain_core.messages import HumanMessage, AIMessage
 from rich.console import Console
 from rich.panel import Panel
@@ -13,6 +14,8 @@ console = Console()
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]🤖 RAG Chat Interactivo (LCEL + Memoria + Cache)")
     console.print("Escribe tus preguntas. Comandos especiales:")
     console.print("  [cyan]/debug[/]   — Activa/desactiva ver chunks recuperados")

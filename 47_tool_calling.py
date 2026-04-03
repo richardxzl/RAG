@@ -14,6 +14,7 @@ Este módulo explora tool calling a bajo nivel — sin create_react_agent —
 para entender exactamente qué pasa en cada paso.
 """
 import json
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -153,6 +154,8 @@ def mostrar_schemas():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 9.2: Tool Calling")
 
     console.print(Panel(

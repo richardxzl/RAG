@@ -9,6 +9,7 @@ Demuestra cómo el pipeline RAG se degrada con gracia cuando fallan componentes:
 
 Principio: el usuario nunca debe ver un stack trace. Siempre hay una respuesta.
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -177,6 +178,8 @@ def query_con_manejo_auth(question: str) -> tuple[str, str]:
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 6.5: Error Handling")
 
     console.print(Panel(

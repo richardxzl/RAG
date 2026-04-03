@@ -175,6 +175,8 @@ def query_con_logging(question: str, logger: logging.Logger) -> str:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 6.1: Logging Estructurado")
 
     console.print(Panel(

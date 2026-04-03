@@ -13,6 +13,7 @@ MessagesState vs estado personalizado:
 Este script implementa un chat con memoria usando MessagesState y
 compara con la aproximación de ventana de contexto (evitar tokens infinitos).
 """
+import logging
 from typing import Annotated
 
 from rich.console import Console
@@ -108,6 +109,8 @@ def demo_conversacion(grafo, thread_id: str, preguntas: list[str]):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 10.2: Memory as State")
 
     console.print(Panel(

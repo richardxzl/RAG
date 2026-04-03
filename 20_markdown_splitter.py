@@ -9,6 +9,7 @@ Problema con RecursiveCharacterTextSplitter en Markdown:
   - No respeta la jerarquía de headers
   - Pierde el contexto de "en qué sección estaba este chunk"
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -179,6 +180,8 @@ def demo_pipeline_completo(chunks_md):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 4.1: Markdown Splitter")
     demo_recursive_splitter()
     chunks_md = demo_markdown_splitter()

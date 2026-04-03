@@ -13,6 +13,7 @@ Este script implementa el patrón completo de "Corrective RAG":
 Este es el grafo más completo del módulo 8. Cada nodo de los módulos anteriores
 se conecta aquí como piezas de un sistema coherente.
 """
+import logging
 from typing import TypedDict, Literal, Annotated
 import operator
 
@@ -251,6 +252,8 @@ def construir_grafo_corrective_rag():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.7: Corrective RAG completo")
 
     grafo = construir_grafo_corrective_rag()

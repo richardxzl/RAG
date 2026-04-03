@@ -12,6 +12,7 @@ import os
 import uuid
 import time
 import json
+import logging
 from dataclasses import dataclass, field
 from typing import Optional
 from rich.console import Console
@@ -179,6 +180,8 @@ def query_con_tracing(question: str, tracer: LocalTracer) -> str:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 6.3: Tracing")
 
     # Intentar LangSmith primero

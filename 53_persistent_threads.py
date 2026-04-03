@@ -13,6 +13,7 @@ Casos de uso:
 Este script simula sesiones separadas (como si el proceso se reiniciara)
 para demostrar que el estado persiste y se puede retomar.
 """
+import logging
 from typing import Annotated
 import json
 
@@ -114,6 +115,8 @@ def listar_threads(checkpointer):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 10.3: Persistent Threads")
 
     console.print(Panel(

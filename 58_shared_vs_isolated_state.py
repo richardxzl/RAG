@@ -19,6 +19,7 @@ LangGraph ofrece Send() para el patrón "fan-out / fan-in":
   1. Fan-out:  desde un nodo, despachar trabajo a N agentes en paralelo (Send)
   2. Fan-in:   recoger todos los resultados en un nodo aggregador
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -205,6 +206,8 @@ def construir_grafo_isolated():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 11.4: Shared vs Isolated State")
 
     console.print(Panel(

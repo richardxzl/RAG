@@ -8,6 +8,7 @@ Demo: python 62_health_checks.py
 """
 import os
 import time
+import logging
 from enum import Enum
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -130,6 +131,8 @@ def ready():
 # ── Demo ──────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 12.4: Health Checks")
 
     client = TestClient(app)

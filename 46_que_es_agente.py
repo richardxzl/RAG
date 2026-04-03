@@ -12,6 +12,7 @@ La diferencia clave: el LLM controla el flujo de ejecución.
 Este script demuestra la diferencia conceptual construyendo ambos y
 comparando cómo responden ante preguntas que requieren razonamiento.
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -136,6 +137,8 @@ def mostrar_grafo_agente():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 9.1: ¿Qué es un agente?")
 
     console.print(Panel(

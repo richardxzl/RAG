@@ -11,6 +11,7 @@ Formato del dataset: JSON con lista de EvalSample
   - metadata: etiquetas para categorizar (tipo, dificultad)
 """
 import json
+import logging
 from pathlib import Path
 from datetime import datetime, timezone
 from rich.console import Console
@@ -158,6 +159,8 @@ def estadisticas_dataset(dataset: dict):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 5.1: Dataset de Evaluación")
 
     console.print(Panel(

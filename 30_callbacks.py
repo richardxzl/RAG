@@ -13,6 +13,7 @@ Implementamos tres callbacks útiles:
   3. MetricsCallback — acumula métricas para análisis
 """
 import time
+import logging
 from collections import defaultdict
 from typing import Any
 from rich.console import Console
@@ -175,6 +176,8 @@ def build_pipeline_con_callbacks(callbacks: list):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 6.2: Callbacks")
 
     timing_cb = TimingCallback()

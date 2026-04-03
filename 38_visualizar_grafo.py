@@ -14,6 +14,7 @@ La visualización sirve para:
 Este script construye un grafo más complejo (con condicionales)
 para que la visualización sea interesante.
 """
+import logging
 from typing import TypedDict, Literal
 
 from rich.console import Console
@@ -83,6 +84,8 @@ def construir_grafo_rag():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 7.5: Visualizar el grafo")
 
     grafo = construir_grafo_rag()

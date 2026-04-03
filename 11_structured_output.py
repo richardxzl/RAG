@@ -9,6 +9,7 @@ Demuestra cómo forzar respuestas JSON del LLM usando StructuredOutputParser:
 Caso de uso: análisis estructurado de reseñas de productos.
 """
 import json
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -160,6 +161,8 @@ def demo_pipeline_completo():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 2.3: StructuredOutputParser")
     demo_sin_parser(RESENAS[0])
     demo_con_parser(RESENAS[0])

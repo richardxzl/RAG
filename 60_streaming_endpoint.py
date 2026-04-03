@@ -7,6 +7,7 @@ Demo: python 60_streaming_endpoint.py
 """
 import asyncio
 import json
+import logging
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -113,6 +114,8 @@ async def demo_streaming():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     asyncio.run(demo_streaming())
 
 

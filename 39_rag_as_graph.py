@@ -13,6 +13,7 @@ En LangGraph se convierte en un grafo con nodos discretos:
   - Puedes agregar ciclos (reformulación) sin romper la estructura
   - El estado centraliza todos los datos del flujo
 """
+import logging
 from typing import TypedDict, Annotated
 import operator
 
@@ -95,6 +96,8 @@ def construir_rag_graph():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 8.1: RAG como Grafo")
 
     console.print(Panel(

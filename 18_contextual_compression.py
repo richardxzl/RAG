@@ -11,6 +11,7 @@ Estrategias demostradas:
   1. LLMChainExtractor: el LLM extrae solo la parte relevante de cada chunk
   2. EmbeddingsFilter: elimina chunks cuya similitud con el query es baja
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -74,6 +75,8 @@ def mostrar_docs_comparacion(titulo: str, docs: list, color: str = "dim"):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 3.5: Contextual Compression")
     console.print(f"\n[bold]Query:[/] {QUERY}\n")
 

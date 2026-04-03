@@ -12,6 +12,7 @@ Configuraciones comparadas:
 """
 import json
 import time
+import logging
 from pathlib import Path
 from itertools import product
 from rich.console import Console
@@ -121,6 +122,8 @@ def evaluar_muestra(question: str, retriever, llm, parser, eval_chain) -> dict:
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 5.4: Comparar Configuraciones")
 
     if not DATASET_PATH.exists():

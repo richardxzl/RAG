@@ -6,6 +6,7 @@ JOINs, full-text, window functions, RLS — imposible en ChromaDB.
 No requiere conexión a Supabase — los ejemplos son educativos.
 """
 import os
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -187,6 +188,8 @@ def show_operators():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     show_comparison()
     show_langchain_api()
     show_operators()

@@ -18,6 +18,7 @@ Este script implementa un sistema de soporte técnico donde:
   - agente_tecnico: experto en LangGraph/LangChain
   - agente_rag: accede a la base de conocimiento
 """
+import logging
 from typing import TypedDict, Annotated, Literal
 
 from rich.console import Console
@@ -205,6 +206,8 @@ def construir_grafo():
 # ── Demo ──────────────────────────────────────────────────────────────────────
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 11.3: Handoff")
 
     console.print(Panel(

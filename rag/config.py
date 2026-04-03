@@ -29,9 +29,10 @@ RETRIEVAL_K = 4
 RETRIEVAL_SEARCH_TYPE = "similarity"
 
 # ── LLM ───────────────────────────────────────────────────
-LLM_MODEL = "claude-haiku-4-5-20251001"
-LLM_TEMPERATURE = 0
-LLM_MAX_TOKENS = 1024
+# Formato: "proveedor/modelo"  →  anthropic/..., openai/..., ollama/..., etc.
+LLM_MODEL = os.getenv("LLM_MODEL", "anthropic/claude-haiku-4-5-20251001")
+LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0"))
+LLM_MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", "1024"))  # ignorado en Ollama
 
 # ── Memory ────────────────────────────────────────────────
 MEMORY_WINDOW = 6  # Últimos N mensajes en el chat

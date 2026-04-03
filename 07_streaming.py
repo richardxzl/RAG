@@ -9,6 +9,7 @@ Demuestra tres formas de hacer streaming sobre un pipeline RAG en LangChain:
 """
 import sys
 import time
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.live import Live
@@ -246,6 +247,8 @@ def demo_streaming_events(question: str) -> None:
 # ── Demo principal ────────────────────────────────────────────────────────────
 
 def run_demo() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Streaming (1.4)")
 
     question = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "¿De qué trata el documento?"

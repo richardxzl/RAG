@@ -8,6 +8,7 @@ Ejemplo: "documentos de 2024 sobre Python" →
 
 Requiere que los documentos tengan metadata estructurada.
 """
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -106,6 +107,8 @@ def demo_con_self_query():
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(name)s: %(message)s")
+    logger = logging.getLogger(__name__)
     console.rule("[bold blue]RAG Lab — Módulo 3.6: Self-Query Retriever")
 
     console.print(Panel(
