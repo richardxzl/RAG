@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from rich.console import Console
 from rich.table import Table
@@ -18,13 +18,10 @@ load_dotenv()
 console = Console()
 
 # ── Configuración ──────────────────────────────────────────
-DOCS_DIR = "./docs"
-CHROMA_DIR = "./chroma_db"
-COLLECTION_NAME = "mi_knowledge_base"
-
-CHUNK_SIZE = 1000       # Caracteres por chunk
-CHUNK_OVERLAP = 200     # Solapamiento
-EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # Modelo local gratuito
+from rag.config import (
+    DOCS_DIR, CHROMA_DIR, COLLECTION_NAME,
+    CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL, EMBEDDING_DIMS,
+)
 
 
 def load_documents(docs_dir: str):

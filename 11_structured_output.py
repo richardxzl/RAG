@@ -17,7 +17,7 @@ from rich.json import JSON
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain.output_parsers import StructuredOutputParser, ResponseSchema
+from langchain_classic.output_parsers import StructuredOutputParser, ResponseSchema
 
 from rag.chain import get_llm
 
@@ -54,11 +54,11 @@ def demo_sin_parser(resena: str):
         # Buscar el JSON si viene envuelto en texto
         start = respuesta.find("{")
         end = respuesta.rfind("}") + 1
-        if start >= 0:
+        if start >= 0 and end > start:
             datos = json.loads(respuesta[start:end])
             console.print("[green]json.loads() funcionó — pero requirió buscar manualmente el JSON[/]")
         else:
-            console.print("[red]No se encontró JSON en la respuesta[/]")
+            console.print("[red]No se encontró JSON válido en la respuesta[/]")
     except json.JSONDecodeError as e:
         console.print(f"[red]json.loads() falló: {e}[/]")
 

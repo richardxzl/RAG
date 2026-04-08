@@ -161,7 +161,7 @@ def main():
         "✅ Cuando el tamaño variable es aceptable\n\n"
         "❌ Documentos técnicos estructurados (usar MarkdownHeaderTextSplitter)\n"
         "❌ Cuando la velocidad de ingesta es crítica (2× más lento)\n"
-        "❌ Documentos muy homogéneos (el splitter no encuentra cambios)[/]",
+        "❌ Documentos muy homogéneos (el splitter no encuentra cambios)",
         border_style="blue",
     ))
 

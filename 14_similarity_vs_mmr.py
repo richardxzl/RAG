@@ -17,7 +17,14 @@ from rag.config import RETRIEVAL_K
 
 console = Console()
 
-QUERY = "¿De qué trata el documento?"
+QUERIES = [
+    "¿Qué es Python y para qué se usa?",
+    "¿Cómo funciona Vue.js y sus componentes?",
+    "¿Qué es Laravel y cómo maneja las rutas?",
+    "¿Cómo escalar una aplicación Node.js?",
+    "arquitectura de inteligencia artificial y agentes",
+]
+QUERY = QUERIES[0]  # cambia el índice para probar distintas queries
 
 
 def get_retriever_similarity(k: int = RETRIEVAL_K):

@@ -4,7 +4,7 @@ embeddings.py — Factory de embeddings.
 Centraliza la creación del modelo de embeddings para garantizar
 que ingesta, retrieval y cache usen SIEMPRE el mismo modelo.
 """
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from rag.config import EMBEDDING_MODEL
 
 _instance = None

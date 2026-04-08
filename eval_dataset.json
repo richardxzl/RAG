@@ -1,0 +1,87 @@
+{
+  "version": "2.0",
+  "created_at": "2026-04-08T00:00:00.000000+00:00",
+  "total": 8,
+  "samples": [
+    {
+      "id": "q001",
+      "question": "¿Qué versión de Python introdujo la sintaxis de union types con el operador |?",
+      "ground_truth": "Python 3.10+ permite usar la sintaxis int | str | None en lugar de Union[int, str, None] para definir tipos unión de forma más limpia.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "baja",
+        "fuente": "python.md"
+      }
+    },
+    {
+      "id": "q002",
+      "question": "¿Qué herramienta de Python es 10x más rápida que pip?",
+      "ground_truth": "uv es un gestor de paquetes y entornos virtuales que es 10x más rápido que pip.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "baja",
+        "fuente": "python.md"
+      }
+    },
+    {
+      "id": "q003",
+      "question": "¿Qué es Pinia en el ecosistema de Vue.js?",
+      "ground_truth": "Pinia es la solución de estado global oficial que reemplaza a Vuex en Vue 3.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "baja",
+        "fuente": "vue.md"
+      }
+    },
+    {
+      "id": "q004",
+      "question": "¿En qué versión de PHP se introdujeron los Enums?",
+      "ground_truth": "Los Enums fueron introducidos en PHP 8.1.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "baja",
+        "fuente": "php.md"
+      }
+    },
+    {
+      "id": "q005",
+      "question": "¿Quién creó Laravel y en qué año?",
+      "ground_truth": "Laravel fue creado por Taylor Otwell en 2011.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "baja",
+        "fuente": "laravel.md"
+      }
+    },
+    {
+      "id": "q006",
+      "question": "¿Sobre qué motor está construido Node.js?",
+      "ground_truth": "Node.js es un runtime de JavaScript construido sobre el motor V8 de Chrome.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "baja",
+        "fuente": "nodejs.md"
+      }
+    },
+    {
+      "id": "q007",
+      "question": "¿Cómo funciona RAG en relación al LLM base?",
+      "ground_truth": "RAG conecta el LLM a conocimiento externo en tiempo de inferencia. Los pesos del modelo no cambian durante este proceso.",
+      "metadata": {
+        "tipo": "conceptual",
+        "dificultad": "media",
+        "fuente": "AI_Architect_Guia_Entrevista.md"
+      }
+    },
+    {
+      "id": "q008",
+      "question": "¿Cuándo elegir Laravel en lugar de Symfony?",
+      "ground_truth": "Se elige Laravel para velocidad, mientras que Symfony se prefiere cuando se necesita más control y escalabilidad.",
+      "metadata": {
+        "tipo": "comparativa",
+        "dificultad": "media",
+        "fuente": "guia_arquitecto_php_entrevista.md"
+      }
+    }
+  ]
+}

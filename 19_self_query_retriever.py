@@ -15,8 +15,8 @@ from rich.table import Table
 from rich.json import JSON
 import json
 
-from langchain.retrievers.self_query.base import SelfQueryRetriever
-from langchain.chains.query_constructor.base import AttributeInfo
+from langchain_classic.retrievers.self_query.base import SelfQueryRetriever
+from langchain_classic.chains.query_constructor.base import AttributeInfo
 from langchain_core.documents import Document
 
 from rag.retriever import get_vectorstore

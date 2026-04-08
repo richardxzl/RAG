@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.exceptions import OutputParserException
-from langchain.output_parsers import OutputFixingParser, RetryWithErrorOutputParser
+from langchain_classic.output_parsers import OutputFixingParser, RetryWithErrorOutputParser
 
 from rag.chain import get_llm
 

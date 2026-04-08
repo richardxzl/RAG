@@ -16,8 +16,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from langchain.retrievers import ContextualCompressionRetriever
-from langchain.retrievers.document_compressors import LLMChainExtractor, EmbeddingsFilter
+from langchain_classic.retrievers import ContextualCompressionRetriever
+from langchain_classic.retrievers.document_compressors import LLMChainExtractor, EmbeddingsFilter
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 

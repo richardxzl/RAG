@@ -17,7 +17,7 @@ from rich.panel import Panel
 from rich.json import JSON
 from rich.table import Table
 
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field, ValidationError, field_validator
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 
@@ -49,6 +49,11 @@ class NoticiaEstructurada(BaseModel):
         ge=1, le=10,
         description="Relevancia del 1 (baja) al 10 (alta) según el impacto de la noticia"
     )
+
+    @field_validator("categoria", mode="before")
+    @classmethod
+    def normalizar_categoria(cls, v: str) -> str:
+        return v.lower() if isinstance(v, str) else v
 
 
 NOTICIAS = [

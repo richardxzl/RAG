@@ -18,6 +18,7 @@ from rich.panel import Panel
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
+from langchain_classic.output_parsers import OutputFixingParser
 from pydantic import BaseModel, Field
 
 from rag.chain import get_llm, build_query_chain, format_docs
@@ -41,12 +42,17 @@ class RelevanceScore(BaseModel):
 
 # ── Prompts de evaluación (LLM-as-a-judge) ───────────────────────────────────
 
+_JSON_FORMAT = (
+    'Responde ÚNICAMENTE con JSON válido, sin texto adicional:\n'
+    '{{"score": 0.8, "razon": "Explicación breve en una oración"}}'
+)
+
 FAITHFULNESS_PROMPT = ChatPromptTemplate.from_messages([
     ("system",
      "Eres un evaluador experto de sistemas RAG. Evalúa si la RESPUESTA está completamente "
      "soportada por el CONTEXTO proporcionado. "
      "Score 1.0 = totalmente soportada, 0.0 = inventada o contradice el contexto.\n\n"
-     "{format_instructions}"),
+     + _JSON_FORMAT),
     ("human",
      "CONTEXTO:\n{context}\n\nRESPUESTA:\n{answer}\n\nEvalúa la faithfulness:"),
 ])
@@ -56,7 +62,7 @@ RELEVANCE_PROMPT = ChatPromptTemplate.from_messages([
      "Eres un evaluador experto de sistemas RAG. Evalúa si la RESPUESTA responde "
      "directamente a la PREGUNTA. "
      "Score 1.0 = responde perfectamente, 0.0 = irrelevante o no responde.\n\n"
-     "{format_instructions}"),
+     + _JSON_FORMAT),
     ("human",
      "PREGUNTA:\n{question}\n\nRESPUESTA:\n{answer}\n\nEvalúa la relevancia:"),
 ])
@@ -66,23 +72,23 @@ RELEVANCE_PROMPT = ChatPromptTemplate.from_messages([
 
 def evaluar_faithfulness(context: str, answer: str, llm) -> FaithfulnessScore:
     """¿La respuesta está soportada por el contexto? No inventa nada."""
-    parser = PydanticOutputParser(pydantic_object=FaithfulnessScore)
+    base_parser = PydanticOutputParser(pydantic_object=FaithfulnessScore)
+    parser = OutputFixingParser.from_llm(parser=base_parser, llm=llm)
     chain = FAITHFULNESS_PROMPT | llm | parser
     return chain.invoke({
-        "context": context[:2000],  # limitar para no exceder tokens
+        "context": context[:2000],
         "answer": answer,
-        "format_instructions": parser.get_format_instructions(),
     })
 
 
 def evaluar_relevance(question: str, answer: str, llm) -> RelevanceScore:
     """¿La respuesta responde a la pregunta que se hizo?"""
-    parser = PydanticOutputParser(pydantic_object=RelevanceScore)
+    base_parser = PydanticOutputParser(pydantic_object=RelevanceScore)
+    parser = OutputFixingParser.from_llm(parser=base_parser, llm=llm)
     chain = RELEVANCE_PROMPT | llm | parser
     return chain.invoke({
         "question": question,
         "answer": answer,
-        "format_instructions": parser.get_format_instructions(),
     })
 
 

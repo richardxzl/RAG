@@ -12,7 +12,7 @@ from rich.console import Console
 from rich.table import Table
 
 from langchain_community.retrievers import BM25Retriever
-from langchain.retrievers import EnsembleRetriever
+from langchain_classic.retrievers import EnsembleRetriever
 from langchain_core.documents import Document
 
 from rag.retriever import get_vectorstore, get_retriever

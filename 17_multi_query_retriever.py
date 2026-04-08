@@ -12,7 +12,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
@@ -23,6 +23,8 @@ console = Console()
 
 QUERIES = [
     "¿Qué tecnologías se mencionan?",
+    "¿Qué es Python y para qué sirve?",
+    "¿Cuáles son las características principales de Vue.js?",
     "Resume los puntos principales",
 ]
 
@@ -95,6 +97,12 @@ def demo_pipeline_completo(query: str):
         llm=llm,
     )
 
+    docs_debug = mq_retriever.invoke(query)
+    console.print(f"  [dim]Chunks recuperados: {len(docs_debug)}[/]")
+    for d in docs_debug:
+        fuente = d.metadata.get("source", "?").split("/")[-1]
+        console.print(f"  [dim]· {fuente}: {d.page_content[:80].replace(chr(10), ' ')}[/]")
+
     chain = (
         RunnablePassthrough.assign(
             context=lambda x: format_docs(mq_retriever.invoke(x["question"])),
@@ -126,7 +134,8 @@ def main():
     for q in QUERIES:
         comparar_retrievers(q)
 
-    demo_pipeline_completo(QUERIES[0])
+    for q in QUERIES:
+        demo_pipeline_completo(q)
 
 
 if __name__ == "__main__":

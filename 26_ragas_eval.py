@@ -66,25 +66,36 @@ def preparar_dataset_ragas(samples: list[dict], retriever, llm) -> list[dict]:
 
 def evaluar_con_ragas(dataset_ragas: list[dict]):
     """Ejecuta la evaluación RAGAS y retorna el resultado."""
+    import warnings
     from datasets import Dataset
     from ragas import evaluate
-    from ragas.metrics import (
-        faithfulness,
-        answer_relevancy,
-        context_precision,
-        context_recall,
-    )
+    from rag.chain import get_llm
+    from rag.embeddings import get_embeddings
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        from ragas.llms import LangchainLLMWrapper
+        from ragas.embeddings import LangchainEmbeddingsWrapper
+        from ragas.metrics._faithfulness import Faithfulness
+        from ragas.metrics._answer_relevance import AnswerRelevancy
+        from ragas.metrics._context_precision import ContextPrecision
+        from ragas.metrics._context_recall import ContextRecall
+
+    ragas_llm = LangchainLLMWrapper(get_llm())
+    ragas_embeddings = LangchainEmbeddingsWrapper(get_embeddings())
+
+    metrics = [
+        Faithfulness(llm=ragas_llm),
+        AnswerRelevancy(llm=ragas_llm, embeddings=ragas_embeddings),
+        ContextPrecision(llm=ragas_llm),
+        ContextRecall(llm=ragas_llm),
+    ]
 
     hf_dataset = Dataset.from_list(dataset_ragas)
 
     resultado = evaluate(
         dataset=hf_dataset,
-        metrics=[
-            faithfulness,
-            answer_relevancy,
-            context_precision,
-            context_recall,
-        ],
+        metrics=metrics,
     )
     return resultado
 
