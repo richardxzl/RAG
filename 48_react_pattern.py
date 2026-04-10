@@ -29,6 +29,25 @@ from langgraph.prebuilt import ToolNode, create_react_agent
 
 from rag.chain import get_llm
 
+
+def get_tool_calling_llm():
+    llm = get_llm()
+    try:
+        llm.bind_tools([])
+        return llm
+    except NotImplementedError:
+        import os
+        from dotenv import load_dotenv
+        from langchain_anthropic import ChatAnthropic
+        load_dotenv(override=True)
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise EnvironmentError(
+                "El LLM configurado no soporta tool calling. "
+                "Añade ANTHROPIC_API_KEY en el .env para usar Claude como fallback."
+            )
+        return ChatAnthropic(model="claude-haiku-4-5-20251001", temperature=0, api_key=api_key)
+
 console = Console()
 
 
@@ -84,7 +103,7 @@ class EstadoReAct(TypedDict):
 
 def nodo_llm(estado: EstadoReAct) -> dict:
     """El LLM razona y decide si llamar una herramienta o responder."""
-    llm = get_llm()
+    llm = get_tool_calling_llm()
     llm_con_tools = llm.bind_tools(TOOLS)
     respuesta = llm_con_tools.invoke(estado["messages"])
 
@@ -134,7 +153,7 @@ def construir_react_prebuilt():
     create_react_agent hace exactamente lo mismo que construir_react_manual()
     pero en una sola línea. Útil para prototipado rápido.
     """
-    llm = get_llm()
+    llm = get_tool_calling_llm()
     return create_react_agent(llm, TOOLS)
 
 

@@ -30,6 +30,25 @@ from langgraph.graph import StateGraph, START, END
 
 from rag.chain import get_llm
 
+
+def get_tool_calling_llm():
+    llm = get_llm()
+    try:
+        llm.bind_tools([])
+        return llm
+    except NotImplementedError:
+        import os
+        from dotenv import load_dotenv
+        from langchain_anthropic import ChatAnthropic
+        load_dotenv(override=True)
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise EnvironmentError(
+                "El LLM configurado no soporta tool calling. "
+                "Añade ANTHROPIC_API_KEY en el .env para usar Claude como fallback."
+            )
+        return ChatAnthropic(model="claude-haiku-4-5-20251001", temperature=0, api_key=api_key)
+
 console = Console()
 
 
@@ -101,7 +120,7 @@ def ciclo_tool_calling(pregunta: str) -> list[BaseMessage]:
       2. Si pide tool → ejecutar → devolver resultado → repetir
       3. Si responde directamente → fin
     """
-    llm = get_llm()
+    llm = get_tool_calling_llm()
     llm_con_tools = llm.bind_tools(TOOLS)
 
     mensajes: list[BaseMessage] = [HumanMessage(content=pregunta)]
@@ -193,7 +212,7 @@ def main():
 
     # Mostrar el AIMessage raw con tool_calls
     console.rule("[yellow]Estructura interna: AIMessage con tool_calls")
-    llm = get_llm().bind_tools(TOOLS)
+    llm = get_tool_calling_llm().bind_tools(TOOLS)
     msg = llm.invoke([HumanMessage(content="¿Qué clima hace en Buenos Aires?")])
     if msg.tool_calls:
         console.print(Panel(

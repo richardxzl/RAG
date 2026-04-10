@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-04-10T20:11:55.449943+00:00",
+  "samples": [
+    {
+      "id": "q001",
+      "question": "¿Qué versión de Python introdujo la sintaxis de union types con el operador |?",
+      "faithfulness": 0.0,
+      "relevance": 1.0
+    },
+    {
+      "id": "q002",
+      "question": "¿Qué herramienta de Python es 10x más rápida que pip?",
+      "faithfulness": 0.0,
+      "relevance": 0.0,
+      "error": "Failed to parse EvalScore from completion {\"properties\": {\"faithfulness\": {\"maximum\": 1.0, \"minimum\": 0.0, \"title\": \"Faithfulness\", \"type\": \"number\"}, \"relevance\": {\"maximum\": 1.0, \"minimum\": 0.0, \"title\": \"Relevance\", \"type\": \"number\"}}, \"required\": [\"faithfulness\", \"relevance\"]}. Got: 2 validation errors for EvalScore\nfaithfulness\n  Field required [type=missing, input_value={'properties': {'faithful...hfulness', 'relevance']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrelevance\n  Field required [type=missing, input_value={'properties': {'faithful...hfulness', 'relevance']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "
+    },
+    {
+      "id": "q003",
+      "question": "¿Qué es Pinia en el ecosistema de Vue.js?",
+      "faithfulness": 1.0,
+      "relevance": 1.0
+    }
+  ],
+  "avg_faithfulness": 0.3333333333333333,
+  "avg_relevance": 0.6666666666666666
+}

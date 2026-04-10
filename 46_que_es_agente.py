@@ -27,6 +27,29 @@ from langgraph.prebuilt import create_react_agent
 
 from rag.chain import get_llm
 
+
+def get_tool_calling_llm():
+    """
+    create_react_agent requiere un LLM con soporte nativo de tool calling (bind_tools).
+    Si el LLM configurado no lo soporta (ej: Ollama llama3.2), usa Anthropic como fallback.
+    """
+    llm = get_llm()
+    try:
+        llm.bind_tools([])  # test rápido
+        return llm
+    except NotImplementedError:
+        import os
+        from dotenv import load_dotenv
+        from langchain_anthropic import ChatAnthropic
+        load_dotenv(override=True)
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise EnvironmentError(
+                "El LLM configurado no soporta tool calling. "
+                "Añade ANTHROPIC_API_KEY en el .env para usar Claude como fallback."
+            )
+        return ChatAnthropic(model="claude-haiku-4-5-20251001", temperature=0, api_key=api_key)
+
 console = Console()
 
 
@@ -74,7 +97,7 @@ def demo_chain_vs_agente():
     La chain SIEMPRE ejecuta retriever → generator, sin importar la pregunta.
     El agente DECIDE qué herramienta usar (o si responder directamente).
     """
-    llm = get_llm()
+    llm = get_tool_calling_llm()
     tools = [calcular, buscar_definicion, contar_palabras]
 
     # Agente ReAct (la forma más simple con LangGraph)
@@ -123,7 +146,7 @@ def demo_chain_vs_agente():
 # ── Mostrar el grafo interno del agente ──────────────────────────────────────
 
 def mostrar_grafo_agente():
-    llm = get_llm()
+    llm = get_tool_calling_llm()
     tools = [calcular, buscar_definicion]
     agente = create_react_agent(llm, tools)
 

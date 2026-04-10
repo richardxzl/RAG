@@ -55,7 +55,7 @@ class TimingCallback(BaseCallbackHandler):
             self.timings["retriever"].append(time.time() - self._starts.pop("retriever"))
 
     def on_chain_start(self, serialized, inputs, **kwargs):
-        chain_name = serialized.get("name", "chain")
+        chain_name = (serialized or {}).get("name", "chain")
         self._starts[f"chain_{chain_name}"] = time.time()
 
     def on_chain_end(self, outputs, **kwargs):
