@@ -105,8 +105,8 @@ def main():
 
     console.print(Panel(
         "[bold]uvicorn 59_fastapi_wrapper:app --reload --port 8000[/bold]\n\n"
-        "Docs interactivos: http://localhost:8000/docs\n"
-        "ReDoc:             http://localhost:8000/redoc",
+        "Docs interactivos: http://127.0.0.1:8000/docs\n"
+        "ReDoc:             http://127.0.0.1:8000/redoc",
         title="Arrancar en producción",
         border_style="yellow",
     ))
